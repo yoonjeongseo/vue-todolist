@@ -27,14 +27,21 @@ export default {
   },
   methods: {
     removeTodo: function(todoItem, index) {
-      console.log(todoItem, index); //todoItems의 값과 인덱스를 받아올 수 있다
-      localStorage.removeItem(todoItem); // vue의 API인  removeItem을 통해서 로컬스토리지의 todoItems의 배열에서 클릭한 removeItem을 지워준다
-      this.todoItems.splice(index, 1); // Javascript의 배열 API인 splice를 이용해 splice(index, 1) 특정인덱스에서 1개를 지운다
+      console.log(todoItem, index); 
+      //todoItems의 값과 인덱스를 받아올 수 있다
+      localStorage.removeItem(todoItem);
+      // vue의 API인  removeItem을 통해서 로컬스토리지의 todoItems의 배열에서 클릭한 removeItem을 지워준다
+      this.todoItems.splice(index, 1);
+      // Javascript의 배열 API인 splice를 이용해 splice(index, 1) 특정인덱스에서 1개를 지운다
     },
     toggleComplete: function(todoItem) {
-      todoItem.completed = !todoItem.completed;
+      todoItem.completed = !todoItem.completed; 
+      //체크버튼을 클릭할 경우 completed의 블린 값을 변경해준다. 
+
       localStorage.removeItem(todoItem.item);
+       //로컬스토리지로 체크된 아이템을 바로 업데이트하는 API가 없기 떄문에 삭제 후,
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+       //todoItem.item에 있는 변경값을 다시 추가해준다.
     }
   },
   created: function() {
