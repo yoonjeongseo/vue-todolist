@@ -18,9 +18,12 @@ export default {
   },
     methods: {
     addTodo: function() {
-      if (this.newTodoItem !== ''){
+      if (this.newTodoItem !== ''){//newTodoItem에 값이 있을 때만 실행한다.
         var obj = {completed: false, item: this.newTodoItem};
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        // 텍스트가 체크 된건지 블린값, 텍스트 값
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); 
+        //obj 객체를 저정한다.
+        //stringify: 자바스크립트의 오브젝트를 스트링값으로 변환시켜준다.
         this.clearInput();
       }
     },
