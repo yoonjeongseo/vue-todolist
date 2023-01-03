@@ -29,7 +29,7 @@ export default {
     removeTodo: function(todoItem, index) {
       console.log(todoItem, index); 
       //todoItems의 값과 인덱스를 받아올 수 있다
-      localStorage.removeItem(todoItem);
+      localStorage.removeItem(todoItem.item);
       // vue의 API인  removeItem을 통해서 로컬스토리지의 todoItems의 배열에서 클릭한 removeItem을 지워준다
       this.todoItems.splice(index, 1);
       // Javascript의 배열 API인 splice를 이용해 splice(index, 1) 특정인덱스에서 1개를 지운다
