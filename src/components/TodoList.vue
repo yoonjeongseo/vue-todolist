@@ -23,10 +23,8 @@ export default {
       // removeItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     },
     toggleComplete: function(todoItem) {
-      todoItem.completed = !todoItem.completed; 
-
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit('toggleItem', todoItem, index);
+      // toggleItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     }
   }
 }

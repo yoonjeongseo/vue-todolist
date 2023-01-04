@@ -5,8 +5,9 @@
     <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트 메서드 명"></TodoInput> -->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
 
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
-    <!-- removeItem이벤트가 발생이 되면 removeOneItem기 실행된다 -->
+    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
+    <!-- removeItem 이벤트가 발생이 되면 removeOneItem기 실행된다 -->
+    <!-- toggleItem 이벤트가 발생이 되면 toggleOneItem기 실행된다 -->
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -35,6 +36,17 @@ export default {
       //TodoList에서 가져옴
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
+    },
+    toggleOneItem(todoItem, index) {
+      // todoItem.completed = !todoItem.completed; 
+      //todoItems배열이 있는데 todoItem을 그냥 접근 하는 건 좋지 않다.
+      //아래와 같이 변경
+
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      // todoItems라는 배열에서 index로 접근해서 적용
+
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   created: function() {
