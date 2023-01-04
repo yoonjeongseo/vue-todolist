@@ -2,7 +2,6 @@
   <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
     <!-- <button v-on:click="addTodo">add</button> -->
-    <!-- 위에 버튼태그 대신에 아래 span태그로 버튼을 꾸민다. -->
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus addBtn"></i>
     </span>
@@ -16,14 +15,15 @@ export default {
       newTodoItem: "" 
     }
   },
-    methods: {
+  methods: {
     addTodo: function() {
-      if (this.newTodoItem !== ''){//newTodoItem에 값이 있을 때만 실행한다.
-        var obj = {completed: false, item: this.newTodoItem};
-        // 텍스트가 체크 된건지 블린값, 텍스트 값
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); 
-        //obj 객체를 저정한다.
-        //stringify: 자바스크립트의 오브젝트를 스트링값으로 변환시켜준다.
+      if (this.newTodoItem !== ''){
+        // this.$emit('이벤트 이름',인자1, 인자2,...);
+
+        this.$emit('addTodoItem', this.newTodoItem);
+        //this.newTodoItem을 상위 컴포넌트로 보내주기 위해서 this.$emit생성
+        //this에서 $emit하게되면 addTodoItem이벤트를 발생시킨다.
+        
         this.clearInput();
       }
     },
