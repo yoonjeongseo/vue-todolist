@@ -23,7 +23,8 @@ export default {
         this.$emit('addTodoItem', this.newTodoItem);
         //this.newTodoItem을 상위 컴포넌트로 보내주기 위해서 this.$emit생성
         //this에서 $emit하게되면 addTodoItem이벤트를 발생시킨다.
-        
+        //addTodoItem는 App.vue에서는 하위 컴포넌트에서 발생시킨 이벤트 이름
+
         this.clearInput();
       }
     },
