@@ -15,6 +15,7 @@ export default {
 }
 </script>
 
+
 <style scoped>
   .clearAllContainer {
     width: 8.5rem;
