@@ -8,7 +8,8 @@
     <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
     <!-- removeItem 이벤트가 발생이 되면 removeOneItem기 실행된다 -->
     <!-- toggleItem 이벤트가 발생이 되면 toggleOneItem기 실행된다 -->
-    <TodoFooter></TodoFooter>
+
+    <TodoFooter v-on:clearAll="clearAllItem"></TodoFooter>
   </div>
 </template>
 
@@ -47,6 +48,13 @@ export default {
 
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
+    clearAllItem() {
+      localStorage.clear();
+      // localStorage을 비운 후에 
+
+      this.todoItems = [];
+      // todoItems를 빈배열로 만든다
     }
   },
   created: function() {

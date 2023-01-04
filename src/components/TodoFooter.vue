@@ -8,8 +8,8 @@
 export default {
   methods: {
     clearTodo: function() {
-      localStorage.clear();
-      //clearTodo를 누르면 로컬스토리지 클리어
+      this.$emit('clearAll');
+      // clearAll라는 이벤트 이름을 정해서 App.vue로 올려보내기 위해 $emit을 한다
     }
   }
 }
