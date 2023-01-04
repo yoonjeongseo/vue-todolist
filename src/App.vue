@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
-    <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트 메서드 명"></TodoInput> -->
 
-    <!-- addTodoItem는  TodoInput인 하위 컴포넌트에서 발생시킨 이벤트 이름 -->
-    <TodoList v-bind:propsdata="todoItems"></TodoList>
+    <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트 메서드 명"></TodoInput> -->
+    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
+
+    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
+    <!-- removeItem이벤트가 발생이 되면 removeOneItem기 실행된다 -->
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -24,11 +25,16 @@ export default {
       todoItems: [] 
     }
   },
-  methods: {//todoItem을 추가하는 메서드
-    addOneItem: function(todoItem) {//todoItem은 TodoInput에서 받아온 인자
+  methods: {
+    addOneItem: function(todoItem) {
       var obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)); 
-      this.todoItems.push(obj); //obj를 넣어준다.
+      this.todoItems.push(obj); 
+    },
+    removeOneItem: function(todoItem, index) { //TodoList에서 받아오기 떄문에 동일하게 todoItem, index를 받아올 수 있게 설정
+      //TodoList에서 가져옴
+      localStorage.removeItem(todoItem.item);
+      this.todoItems.splice(index, 1);
     }
   },
   created: function() {

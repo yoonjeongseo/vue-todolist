@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
-        <!-- in todoItem을  in propsdata으로 변경, App.vue의 propsdata를 받아옴 -->
+
         <i class="chkBtn fas fa-check" v-bind:class="{chkBtnCom: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
         <span v-bind:class="{textCom: todoItem.completed}">{{ todoItem.item }}</span>
         <!-- <button v-on:click="removeTodo">Delete</button> -->
@@ -17,12 +17,10 @@
 <script>
 export default {
   props: ['propsdata'],
-  // App.vue의 데이터를 받아서 TodoList에 데이터를 내리기 위해 propsdata가 필요하다.
   methods: {
     removeTodo: function(todoItem, index) {
-      console.log(todoItem, index); 
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index);
+      // removeItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     },
     toggleComplete: function(todoItem) {
       todoItem.completed = !todoItem.completed; 
