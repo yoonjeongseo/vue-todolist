@@ -22,7 +22,7 @@ export default {
       this.$emit('removeItem', todoItem, index);
       // removeItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     },
-    toggleComplete: function(todoItem) {
+    toggleComplete: function(todoItem, index) {
       this.$emit('toggleItem', todoItem, index);
       // toggleItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     }

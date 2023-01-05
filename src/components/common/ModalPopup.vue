@@ -4,26 +4,29 @@
       <div class="modal-wrapper">
         <div class="modal-container">
 
+          <!-- 모달 헤더 -->
           <div class="modal-header">
             <slot name="header">
               default header
             </slot>
           </div>
 
+          <!-- 모달 바디 -->
           <div class="modal-body">
             <slot name="body">
               default body
             </slot>
           </div>
 
-          <div class="modal-footer">
+          <!-- 모달 푸터가 있다면 -->
+          <!-- <div class="modal-footer">
             <slot name="footer">
               default footer
               <button class="modal-default-button" @click="$emit('close')">
                 OK
-              </button>
+              </button> 버튼은 선택
             </slot>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

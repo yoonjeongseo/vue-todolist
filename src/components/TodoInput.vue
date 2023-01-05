@@ -11,14 +11,30 @@
     you can use custom content here to overwrite
     default content
   -->
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">
+        경고!
+        <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
+        <!-- @click은 v-on:click의 축약 -->
+      </h3>
+      <!-- slot은 모달의 기능을 재정의 -->
+
+      <div slot="body">
+        아무것도 입력하지 않았습니다.
+      </div> 
+      <!-- ModalPopup.vue의 slot의 name을 가져와 연결 -->
+      
+
+      <!-- <div slot="footer">
+        푸터
+      </div>  
+      푸터가 있을 경우 -->
     </Modal>
+    <!-- ModalPopup.vue의 내용을 들고와 붙이는 영역 -->
   </div>
-  <!-- vue에서는 template 바로 하위 레벨에는 한개의 엘리먼트만 존재 하도록 한다 -->
 </template>
 
 <script>
-import Modal from './common/Modal.vue'
+import Modal from './common/ModalPopup.vue'
 
 export default {
   data: function() {
@@ -33,6 +49,8 @@ export default {
 
         this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
+      } else { // input에 빈칸일 경우
+        this.showModal = !this.showModal; //모달 펍업의 false를 true로 바꾼다
       }
     },
     clearInput: function() {
@@ -76,4 +94,8 @@ export default {
     color: #fff;
     /* vertical-align: middle; */
   }
+  .closeModalBtn {
+    color: #42b983;
+  }
+  /* 추가 */
 </style>
