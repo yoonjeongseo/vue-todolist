@@ -1,6 +1,7 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul"> 
+      <!-- ul태그 대신에 transition을 넣기 위해 transition-group의 태그는 ul로 적는다 -->
       <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
 
         <i class="chkBtn fas fa-check" v-bind:class="{chkBtnCom: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
@@ -10,7 +11,7 @@
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -20,11 +21,9 @@ export default {
   methods: {
     removeTodo: function(todoItem, index) {
       this.$emit('removeItem', todoItem, index);
-      // removeItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     },
     toggleComplete: function(todoItem, index) {
       this.$emit('toggleItem', todoItem, index);
-      // toggleItem라는 이벤트 이름을 정해서 todoItem, index을 App.vue로 올려보내기 위해 $emit을 한다
     }
   }
 }
@@ -67,5 +66,14 @@ export default {
 
   .shadow {
     box-shadow: 5px 10px 10px rgba(0, 0, 0, .03);
+  }
+
+  /* 리스트 아이템 트랜지션 효과 */
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
   }
 </style>
