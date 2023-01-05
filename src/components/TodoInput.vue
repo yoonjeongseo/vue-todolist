@@ -5,32 +5,42 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus addBtn"></i>
     </span>
+
+    <Modal v-if="showModal" @close="showModal = false">
+      <!--
+    you can use custom content here to overwrite
+    default content
+  -->
+      <h3 slot="header">custom header</h3>
+    </Modal>
   </div>
+  <!-- vue에서는 template 바로 하위 레벨에는 한개의 엘리먼트만 존재 하도록 한다 -->
 </template>
 
 <script>
+import Modal from './common/Modal.vue'
+
 export default {
   data: function() {
     return {
-      newTodoItem: "" 
+      newTodoItem: "",
+      showModal: false
     }
   },
   methods: {
     addTodo: function() {
       if (this.newTodoItem !== ''){
-        // this.$emit('이벤트 이름',인자1, 인자2,...);
 
         this.$emit('addTodoItem', this.newTodoItem);
-        //this.newTodoItem을 상위 컴포넌트로 보내주기 위해서 this.$emit생성
-        //this에서 $emit하게되면 addTodoItem이벤트를 발생시킨다.
-        //addTodoItem는 App.vue에서는 하위 컴포넌트에서 발생시킨 이벤트 이름
-
         this.clearInput();
       }
     },
     clearInput: function() {
       this.newTodoItem = '';
     }
+  },
+  components: {
+    Modal: Modal,
   }
 }
 </script>
