@@ -7,5 +7,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   //export로 const store을 하면 store변수는 밖에서도 사용가능하다
-
+  state: {
+    headerText: 'TODO it!'
+  }
 });
