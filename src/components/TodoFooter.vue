@@ -7,7 +7,7 @@
 <script>
 export default {
   methods: {
-    clearTodo: function() {
+    clearTodo() {
       this.$emit('clearAll');
       // clearAll라는 이벤트 이름을 정해서 App.vue로 올려보내기 위해 $emit을 한다
     }

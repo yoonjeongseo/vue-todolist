@@ -37,14 +37,14 @@
 import Modal from './common/ModalPopup.vue'
 
 export default {
-  data: function() {
+  data() {
     return {
       newTodoItem: "",
       showModal: false
     }
   },
   methods: {
-    addTodo: function() {
+    addTodo() {
       if (this.newTodoItem !== ''){
 
         this.$emit('addTodoItem', this.newTodoItem);
@@ -53,7 +53,7 @@ export default {
         this.showModal = !this.showModal; //모달 펍업의 false를 true로 바꾼다
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodoItem = '';
     }
   },

@@ -22,18 +22,18 @@ import TodoFooter from './components/TodoFooter.vue'
 
 
 export default {
-  data: function() {
+  data() {
     return {
       todoItems: [] 
     }
   },
   methods: {
-    addOneItem: function(todoItem) {
+    addOneItem(todoItem) {
       const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)); 
       this.todoItems.push(obj); 
     },
-    removeOneItem: function(todoItem, index) { //TodoList에서 받아오기 떄문에 동일하게 todoItem, index를 받아올 수 있게 설정
+    removeOneItem(todoItem, index) { //TodoList에서 받아오기 떄문에 동일하게 todoItem, index를 받아올 수 있게 설정
       //TodoList에서 가져옴
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
@@ -57,7 +57,7 @@ export default {
       // todoItems를 빈배열로 만든다
     }
   },
-  created: function() {
+  created() {
     if(localStorage.length > 0) {
       for(let i = 0; i < localStorage.length; i++) {
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
