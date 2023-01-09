@@ -47,7 +47,10 @@ export default {
     addTodo() {
       if (this.newTodoItem !== ''){
 
-        this.$emit('addTodoItem', this.newTodoItem);
+        // this.$emit('addTodoItem', this.newTodoItem);
+        this.$store.commit('addOneItem', this.newTodoItem);
+        //commit하는 이유는 store의 addOneItem를 동작시키기 위해서
+
         this.clearInput();
       } else { // input에 빈칸일 경우
         this.showModal = !this.showModal; //모달 펍업의 false를 true로 바꾼다

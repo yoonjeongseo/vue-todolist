@@ -1,15 +1,12 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <!-- app.vue에서는 내용을 표시할 뿐 데이터를 직접 받거나 할 필요가 없기 때문 -->
+    <TodoList></TodoList>
 
-    <!-- <TodoInput v-on:하위 컴포넌트에서 발생시킨 이벤트 이름="현재 컴포넌트 메서드 명"></TodoInput> -->
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
 
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem" v-on:toggleItem="toggleOneItem"></TodoList>
-    <!-- removeItem 이벤트가 발생이 되면 removeOneItem기 실행된다 -->
-    <!-- toggleItem 이벤트가 발생이 되면 toggleOneItem기 실행된다 -->
-
-    <TodoFooter v-on:clearAll="clearAllItem"></TodoFooter>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -22,40 +19,38 @@ import TodoFooter from './components/TodoFooter.vue'
 
 
 export default {
-  data() {
-    return {
-      todoItems: [] 
-    }
-  },
-  methods: {
-    addOneItem(todoItem) {
-      const obj = {completed: false, item: todoItem};
-      localStorage.setItem(todoItem, JSON.stringify(obj)); 
-      this.todoItems.push(obj); 
-    },
-    removeOneItem(todoItem, index) { //TodoList에서 받아오기 떄문에 동일하게 todoItem, index를 받아올 수 있게 설정
-      //TodoList에서 가져옴
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-    toggleOneItem(todoItem, index) {
-      // todoItem.completed = !todoItem.completed; 
-      //todoItems배열이 있는데 todoItem을 그냥 접근 하는 건 좋지 않다.
-      //아래와 같이 변경
+  // data() {
+  //   return {
+  //     todoItems: [] 
+  //   }
+  // }, 
+  //state를 store에서 관리해서 필요가 없다
+  methods: { //mutations와 같다.
 
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      // todoItems라는 배열에서 index로 접근해서 적용
+    //store.js 파일로 넘김
+    // addOneItem(todoItem) {
+    //   const obj = {completed: false, item: todoItem};
+    //   localStorage.setItem(todoItem, JSON.stringify(obj)); 
+    //   this.todoItems.push(obj); 
+    // }, 
+    // removeOneItem(todoItem, index) {
+      
+    //   localStorage.removeItem(todoItem.item);
+    //   this.todoItems.splice(index, 1);
+    // },
+    // toggleOneItem(todoItem, index) {
+      
 
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItem() {
-      localStorage.clear();
-      // localStorage을 비운 후에 
+    //   this.todoItems[index].completed = !this.todoItems[index].completed;
 
-      this.todoItems = [];
-      // todoItems를 빈배열로 만든다
-    }
+    //   localStorage.removeItem(todoItem.item);
+    //   localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    // },
+    // clearAllItem() {
+    //   localStorage.clear();
+
+    //   this.todoItems = [];
+    // }
   },
   components: {
     TodoHeader,
