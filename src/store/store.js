@@ -28,6 +28,7 @@ export const store = new Vuex.Store({
       return state.todoItems;
     }
   },
+  //storedTodoItems를 선언해 state에 접근해서 todoItems을 가져온다. 
   mutations: {
     addOneItem(state, todoItem) {
       const obj = {completed: false, item: todoItem};
@@ -35,7 +36,6 @@ export const store = new Vuex.Store({
       state.todoItems.push(obj); 
     },
     removeOneItem(state, payload) {
-      
       localStorage.removeItem(payload.todoItem.item);
       state.todoItems.splice(payload.index, 1);
     },
