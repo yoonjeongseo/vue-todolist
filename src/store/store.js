@@ -6,8 +6,8 @@ Vue.use(Vuex);
 
 const storage = {
   fetch() {
-    const arr = []; //state에 todoItems이 다른 레벨이라 접근할 수 없어서 배열 선언을 해서 담아 반환하려고 배열 만듬.
-    if(localStorage.length > 0) { //App.vue에서 가져온 created 안에 내용
+    const arr = []; 
+    if(localStorage.length > 0) { 
       for(let i = 0; i < localStorage.length; i++) {
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
 
@@ -15,22 +15,24 @@ const storage = {
         }
       }
     }
-    return arr; //arr배열 반환
+    return arr; 
   }
 }
 
 export const store = new Vuex.Store({
-  //export로 const store을 하면 store변수는 밖에서도 사용가능하다
   state: {
     todoItems: storage.fetch()
-    //App.vue에서 가져온 todoItems를 위에 storage,fetch의 내용을 담는다.
+  },
+  getters: {
+    storedTodoItems(state) {
+      return state.todoItems;
+    }
   },
   mutations: {
     addOneItem(state, todoItem) {
       const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)); 
       state.todoItems.push(obj); 
-      //mutations에서 state를 접근하려면 state를 하고 접근해야한다.
     },
     removeOneItem(state, payload) {
       
@@ -38,8 +40,6 @@ export const store = new Vuex.Store({
       state.todoItems.splice(payload.index, 1);
     },
     toggleOneItem(state, payload) {
-      
-
       state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
 
       localStorage.removeItem(payload.todoItem.item);
@@ -47,7 +47,6 @@ export const store = new Vuex.Store({
     },
     clearAllItem(state) {
       localStorage.clear();
-
       state.todoItems = [];
     }
   }

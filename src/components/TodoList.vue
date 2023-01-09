@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-group name="list" tag="ul"> 
-      <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+      <li v-for="(todoItem, index) in this.storedTodoItems" v-bind:key="todoItem.item" class="shadow">
         <!-- propsdata대신 this.$store.state.todoItems으로 변경: store파일에 todoItems접근을 위해 -->
         <i class="chkBtn fas fa-check" v-bind:class="{chkBtnCom: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
         <span v-bind:class="{textCom: todoItem.completed}">{{ todoItem.item }}</span>
@@ -15,6 +15,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+//mapGetters에 접근 가능 하도록
+
 export default {
   methods: {
     removeTodo(todoItem, index) {
@@ -33,6 +36,12 @@ export default {
       // this.$emit('toggleItem', todoItem, index);
       this.$store.commit('toggleOneItem', {todoItem, index});
     }
+  },
+  computed: {
+    // TodoItems() {
+    //   return this.$store.getters.storedTodoItems;
+    // }
+    ...mapGetters(['storedTodoItems'])
   }
 }
 </script>
