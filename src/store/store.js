@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex);
-//use는 vue 플러그인, vuex를 전역으로 사용하고 싶을 때, 적음
 
 
 const storage = {
