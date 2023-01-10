@@ -25,6 +25,7 @@ export default {
       toggleComplete: 'toggleOneItem'
     }),
     //removeOneItem 하나로 받기 때문에 (todoItem, index)없이 위에 removeTodo(todoItem, index) 각각 받았던 것을 removeTodo({todoItem, index}) 객체로 묶어서 받는다
+    //toggleComplete도 removeOneItem과 같다
 
     // removeTodo(todoItem, index) {
     //   this.$store.commit('removeOneItem', {todoItem, index});
